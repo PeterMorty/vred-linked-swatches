@@ -1,0 +1,8 @@
+/**
+ * HCWLP Admin CSS Styles
+ */
+
+#woocommerce-product-data ul.wc-tabs li.hcwlp_options a:before {
+	font-family: Dashicons;
+	content: '\f103'
+}
