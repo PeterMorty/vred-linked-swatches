@@ -1,4 +1,3 @@
-@'
 <?php
 
 if (PHP_SAPI !== 'cli') {
@@ -113,4 +112,3 @@ if (file_put_contents($output_path, $json) === false) {
 }
 
 fwrite(STDOUT, 'Generated manifest for version ' . $header_version . "\n");
-'@ | Set-Content -Path scripts/build-update-manifest.php -Encoding UTF8
