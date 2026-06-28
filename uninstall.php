@@ -1,15 +1,11 @@
 <?php
-
 /**
- * Fired when the plugin is uninstalled.
- *
- * @link       https://hispacomercios.com
- * @since      1.0.0
- *
- * @package    hc-woo-linked-products
+ * Uninstall cleanup
  */
 
-// If uninstall not called from WordPress, then exit.
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+if (! defined('WP_UNINSTALL_PLUGIN')) {
 	exit;
 }
+
+delete_site_transient('vred_linked_swatches_remote_plugin_info');
+delete_site_transient('update_plugins');

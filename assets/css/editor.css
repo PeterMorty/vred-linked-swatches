@@ -1,0 +1,28 @@
+/** Elementor editor badge */
+.elementor-panel .elementor-element[data-widget_type="vred-linked-swatch-trigger"],
+.elementor-panel .elementor-element[data-widget_type="vred-linked-swatch-trigger.default"],
+.elementor-panel .elementor-element[data-widget_type="vred-linked-swatches"],
+.elementor-panel .elementor-element[data-widget_type="vred-linked-swatches.default"],
+.elementor-panel .elementor-element:has(.vred-linked-swatches-icon) {
+	position: relative
+}
+.elementor-panel .elementor-element[data-widget_type="vred-linked-swatch-trigger"]::after,
+.elementor-panel .elementor-element[data-widget_type="vred-linked-swatch-trigger.default"]::after,
+.elementor-panel .elementor-element[data-widget_type="vred-linked-swatches"]::after,
+.elementor-panel .elementor-element[data-widget_type="vred-linked-swatches.default"]::after,
+.elementor-panel .elementor-element:has(.vred-linked-swatches-icon)::after {
+	content: "VR";
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	padding: 3px 5px;
+	font-size: 10px;
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: .02em;
+	color: #fff;
+	background: #000;
+	border-radius: 3px;
+	pointer-events: none;
+	z-index: 2
+}

@@ -1,0 +1,18 @@
+{
+    "name": "VRED Linked Swatches",
+    "version": "2.0.0",
+    "download_url": "https://dev.viviendoenred.com/wordpress/plugins/vred-linked-swatches/updates/vred-linked-swatches-v2.0.0.zip",
+    "homepage": "https://viviendoenred.com",
+    "requires": "6.5",
+    "tested": "7.0",
+    "requires_php": "7.4",
+    "last_updated": "2026-06-28 21:46:46",
+    "icons": {
+        "1x": "https://dev.viviendoenred.com/wordpress/plugins/vred-linked-swatches/updates/icon-128x128.png",
+        "2x": "https://dev.viviendoenred.com/wordpress/plugins/vred-linked-swatches/updates/icon-256x256.png"
+    },
+    "sections": {
+        "description": "Connect independent WooCommerce products as visual linked swatches for Elementor product templates.",
+        "installation": "Upload the plugin ZIP, activate WooCommerce and Elementor, activate VRED Linked Swatches, configure linked products in the product data panel, then add the Elementor widgets to your product template."
+    }
+}

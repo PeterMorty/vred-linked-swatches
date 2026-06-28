@@ -1,0 +1,282 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: VRED Linked Swatches 2.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-28 21:11+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: ChatGPT\n"
+
+
+#: includes/Admin/Swatch_Panel.php:26
+#: includes/Elementor/Linked_Swatches_Widget.php:24
+msgid "Linked Swatches"
+msgstr ""
+
+#: includes/Admin/Swatch_Panel.php:55
+msgid "Linked products"
+msgstr ""
+
+#: includes/Admin/Swatch_Panel.php:62
+msgid "Search products..."
+msgstr ""
+
+#: includes/Admin/Swatch_Panel.php:78
+msgid "Option name"
+msgstr ""
+
+#: includes/Admin/Swatch_Panel.php:81
+msgid "Visible name for this option. Example: Brown, Oak or Matte. If empty, the product name is used."
+msgstr ""
+
+#: includes/Admin/Swatch_Panel.php:87
+msgid "Primary color"
+msgstr ""
+
+#: includes/Admin/Swatch_Panel.php:92
+msgid "Secondary color"
+msgstr ""
+
+#: includes/Admin/Swatch_Panel.php:97
+msgid "Texture image"
+msgstr ""
+
+#: includes/Admin/Swatch_Panel.php:104
+msgid "Select image"
+msgstr ""
+
+#: includes/Admin/Swatch_Panel.php:105
+msgid "Remove image"
+msgstr ""
+
+#: includes/Assets.php:80
+msgid "Select texture image"
+msgstr ""
+
+#: includes/Assets.php:81
+msgid "Use image"
+msgstr ""
+
+#: includes/Elementor/Elementor.php:38
+msgid "VRED Linked Swatches"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:24
+msgid "Linked Swatch Trigger"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:54
+#: includes/Elementor/Linked_Swatches_Widget.php:54
+msgid "Content"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:65
+msgid "Action"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:69
+msgid "Custom link"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:70
+msgid "VRED Elements panel"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:79
+msgid "Label"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:81
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:82
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:405
+#: includes/Renderer.php:26
+msgid "Color"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:89
+msgid "Link"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:109
+msgid "Extra CSS classes"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:111
+msgid "Optional classes for external popup, off-canvas, or selector-based integrations."
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:121
+msgid "Panel ID"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:123
+msgid "Enter the VRED Elements Panel ID without #. The target panel must be rendered on the same page."
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:134
+msgid "Panel action"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:138
+msgid "Open panel"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:139
+msgid "Toggle panel"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:154
+msgid "Trigger"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:163
+msgid "Label typography"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:171
+msgid "Label color"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:183
+msgid "Value typography"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:191
+msgid "Value color"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:202
+#: includes/Elementor/Linked_Swatches_Widget.php:345
+msgid "Swatch"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:211
+msgid "Swatch size (px)"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:405
+msgid "Size (px)"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:229
+#: includes/Elementor/Linked_Swatches_Widget.php:214
+#: includes/Elementor/Linked_Swatches_Widget.php:365
+msgid "Border width (px)"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:247
+#: includes/Elementor/Linked_Swatches_Widget.php:232
+#: includes/Elementor/Linked_Swatches_Widget.php:383
+msgid "Border radius"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:269
+#: includes/Elementor/Linked_Swatches_Widget.php:254
+#: includes/Elementor/Linked_Swatches_Widget.php:354
+msgid "Border color"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:280
+msgid "Icon"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:301
+msgid "Icon size"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:323
+msgid "Swatch spacing (px)"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:341
+msgid "Horizontal offset (px)"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:359
+msgid "Vertical offset (px)"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:377
+msgid "Icon color"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:61
+msgid "Include current product"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:71
+msgid "Show product image"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:73
+msgid "Yes"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:74
+msgid "No"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:101
+msgid "Design"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:109
+msgid "Columns"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:127
+msgid "Separation between elements (px)"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:145
+msgid "Element"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:154
+#: includes/Elementor/Linked_Swatches_Widget.php:295
+msgid "Alignment"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:158
+#: includes/Elementor/Linked_Swatches_Widget.php:299
+msgid "Left"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:162
+#: includes/Elementor/Linked_Swatches_Widget.php:303
+msgid "Center"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:166
+#: includes/Elementor/Linked_Swatches_Widget.php:307
+msgid "Right"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:184
+msgid "Item width (px)"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:202
+msgid "Padding"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:265
+msgid "Active border color"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:276
+msgid "Text"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:285
+msgid "Trim text"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:326
+msgid "Typography"
+msgstr ""
+
+#: includes/Elementor/Linked_Swatches_Widget.php:334
+msgid "Text color"
+msgstr ""
