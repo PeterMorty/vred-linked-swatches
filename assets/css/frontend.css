@@ -3,6 +3,7 @@
 .vred-linked-swatches-list {
 	--vred-linked-swatches-swatch-size: 40px;
 	--vred-linked-swatches-list-swatch-size: 12px;
+	--vred-linked-swatches-swatch-border-style: solid;
 	--vred-linked-swatches-swatch-border-width: 1px;
 	--vred-linked-swatches-swatch-border-color: var(--vred-linked-swatches-border-color);
 	--vred-linked-swatches-swatch-radius: 0;
@@ -26,6 +27,7 @@
 	--vred-linked-swatches-items-margin-left: 0;
 	--vred-linked-swatches-items-margin-right: auto;
 	--vred-linked-swatches-items-padding: 8px;
+	--vred-linked-swatches-items-border-style: solid;
 	--vred-linked-swatches-items-border-width: 1px;
 	--vred-linked-swatches-items-border-color: transparent;
 	--vred-linked-swatches-items-active-border-color: var(--vred-linked-swatches-active-color);
@@ -110,7 +112,9 @@
 	width: var(--vred-linked-swatches-swatch-size);
 	height: var(--vred-linked-swatches-swatch-size);
 	box-sizing: border-box;
-	border: var(--vred-linked-swatches-swatch-border-width) solid var(--vred-linked-swatches-swatch-border-color);
+	border-color: var(--vred-linked-swatches-swatch-border-color);
+	border-style: var(--vred-linked-swatches-swatch-border-style);
+	border-width: var(--vred-linked-swatches-swatch-border-width);
 	border-radius: var(--vred-linked-swatches-swatch-radius);
 	background: var(--vred-linked-swatches-color, transparent);
 	background-clip: padding-box;
@@ -151,7 +155,7 @@
 	max-width: 100%;
 	box-sizing: border-box;
 	border-color: var(--vred-linked-swatches-items-border-color);
-	border-style: solid;
+	border-style: var(--vred-linked-swatches-items-border-style);
 	border-width: var(--vred-linked-swatches-items-border-width);
 	border-radius: var(--vred-linked-swatches-items-radius);
 	background: transparent;

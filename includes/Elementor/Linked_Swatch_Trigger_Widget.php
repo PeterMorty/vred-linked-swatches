@@ -3,6 +3,7 @@
 namespace VRED_Linked_Swatches\Elementor;
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Widget_Base;
@@ -223,20 +224,28 @@ final class Linked_Swatch_Trigger_Widget extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'swatch_border_width',
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
 			[
-				'label' => __('Border width (px)', 'vred-linked-swatches'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => ['px'],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 20,
+				'name' => 'swatch_border',
+				'label' => __('Border', 'vred-linked-swatches'),
+				'selector' => '{{WRAPPER}} .vred-linked-swatches',
+				'fields_options' => [
+					'border' => [
+						'selectors' => [
+							'{{WRAPPER}} .vred-linked-swatches' => '--vred-linked-swatches-swatch-border-style: {{VALUE}};',
+						],
 					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .vred-linked-swatches' => '--vred-linked-swatches-swatch-border-width: {{SIZE}}{{UNIT}};',
+					'width' => [
+						'selectors' => [
+							'{{WRAPPER}} .vred-linked-swatches' => '--vred-linked-swatches-swatch-border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						],
+					],
+					'color' => [
+						'selectors' => [
+							'{{WRAPPER}} .vred-linked-swatches' => '--vred-linked-swatches-swatch-border-color: {{VALUE}};',
+						],
+					],
 				],
 			]
 		);
@@ -259,17 +268,6 @@ final class Linked_Swatch_Trigger_Widget extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .vred-linked-swatches' => '--vred-linked-swatches-swatch-radius: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'swatch_border_color',
-			[
-				'label' => __('Border color', 'vred-linked-swatches'),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .vred-linked-swatches' => '--vred-linked-swatches-swatch-border-color: {{VALUE}};',
 				],
 			]
 		);

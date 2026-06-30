@@ -155,31 +155,16 @@ msgstr "Color de valor"
 msgid "Swatch"
 msgstr "Muestra"
 
-#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:211
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:212
+#: includes/Elementor/Linked_Swatches_Widget.php:352
 msgid "Swatch size (px)"
 msgstr "Tamaño de muestra (px)"
-
-#: includes/Elementor/Linked_Swatches_Widget.php:405
-msgid "Size (px)"
-msgstr "Tamaño (px)"
-
-#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:229
-#: includes/Elementor/Linked_Swatches_Widget.php:214
-#: includes/Elementor/Linked_Swatches_Widget.php:365
-msgid "Border width (px)"
-msgstr "Ancho del borde (px)"
 
 #: includes/Elementor/Linked_Swatch_Trigger_Widget.php:247
 #: includes/Elementor/Linked_Swatches_Widget.php:232
 #: includes/Elementor/Linked_Swatches_Widget.php:383
 msgid "Border radius"
 msgstr "Radio del borde"
-
-#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:269
-#: includes/Elementor/Linked_Swatches_Widget.php:254
-#: includes/Elementor/Linked_Swatches_Widget.php:354
-msgid "Border color"
-msgstr "Color del borde"
 
 #: includes/Elementor/Linked_Swatch_Trigger_Widget.php:280
 msgid "Icon"
@@ -264,6 +249,12 @@ msgstr "Ancho del elemento (px)"
 #: includes/Elementor/Linked_Swatches_Widget.php:202
 msgid "Padding"
 msgstr "Relleno"
+
+#: includes/Elementor/Linked_Swatch_Trigger_Widget.php:229
+#: includes/Elementor/Linked_Swatches_Widget.php:214
+#: includes/Elementor/Linked_Swatches_Widget.php:371
+msgid "Border"
+msgstr "Borde"
 
 #: includes/Elementor/Linked_Swatches_Widget.php:265
 msgid "Active border color"

@@ -3,6 +3,7 @@
 namespace VRED_Linked_Swatches\Elementor;
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
@@ -208,20 +209,39 @@ final class Linked_Swatches_Widget extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'item_border_width',
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
 			[
-				'label' => __('Border width (px)', 'vred-linked-swatches'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => ['px'],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 20,
+				'name' => 'item_border',
+				'label' => __('Border', 'vred-linked-swatches'),
+				'selector' => $root_selector,
+				'fields_options' => [
+					'border' => [
+						'selectors' => [
+							$root_selector => '--vred-linked-swatches-items-border-style: {{VALUE}};',
+						],
+					],
+					'width' => [
+						'selectors' => [
+							$root_selector => '--vred-linked-swatches-items-border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						],
+					],
+					'color' => [
+						'selectors' => [
+							$root_selector => '--vred-linked-swatches-items-border-color: {{VALUE}};',
+						],
 					],
 				],
+			]
+		);
+
+		$this->add_control(
+			'active_border_color',
+			[
+				'label' => __('Active border color', 'vred-linked-swatches'),
+				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					$root_selector => '--vred-linked-swatches-items-border-width: {{SIZE}}{{UNIT}};',
+					$root_selector => '--vred-linked-swatches-items-active-border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -244,28 +264,6 @@ final class Linked_Swatches_Widget extends Widget_Base {
 				],
 				'selectors' => [
 					$root_selector => '--vred-linked-swatches-items-radius: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'item_border_color',
-			[
-				'label' => __('Border color', 'vred-linked-swatches'),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					$root_selector => '--vred-linked-swatches-items-border-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'active_border_color',
-			[
-				'label' => __('Active border color', 'vred-linked-swatches'),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					$root_selector => '--vred-linked-swatches-items-active-border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -348,31 +346,49 @@ final class Linked_Swatches_Widget extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'swatch_border_color',
-			[
-				'label' => __('Border color', 'vred-linked-swatches'),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					$root_selector => '--vred-linked-swatches-swatch-border-color: {{VALUE}};',
-				],
-			]
-		);
-
 		$this->add_responsive_control(
-			'visual_border_width',
+			'visual_size',
 			[
-				'label' => __('Border width (px)', 'vred-linked-swatches'),
+				'label' => __('Swatch size (px)', 'vred-linked-swatches'),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range' => [
 					'px' => [
-						'min' => 0,
-						'max' => 12,
+						'min' => 32,
+						'max' => 360,
 					],
 				],
+				'condition' => [
+					'show_images' => 'yes',
+				],
 				'selectors' => [
-					$root_selector => '--vred-linked-swatches-swatch-border-width: {{SIZE}}{{UNIT}};',
+					$root_selector => '--vred-linked-swatches-list-swatch-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'swatch_border',
+				'label' => __('Border', 'vred-linked-swatches'),
+				'selector' => $root_selector,
+				'fields_options' => [
+					'border' => [
+						'selectors' => [
+							$root_selector => '--vred-linked-swatches-swatch-border-style: {{VALUE}};',
+						],
+					],
+					'width' => [
+						'selectors' => [
+							$root_selector => '--vred-linked-swatches-swatch-border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						],
+					],
+					'color' => [
+						'selectors' => [
+							$root_selector => '--vred-linked-swatches-swatch-border-color: {{VALUE}};',
+						],
+					],
 				],
 			]
 		);
@@ -395,27 +411,6 @@ final class Linked_Swatches_Widget extends Widget_Base {
 				],
 				'selectors' => [
 					$root_selector => '--vred-linked-swatches-swatch-radius: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'visual_size',
-			[
-				'label' => __('Size (px)', 'vred-linked-swatches'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => ['px'],
-				'range' => [
-					'px' => [
-						'min' => 32,
-						'max' => 360,
-					],
-				],
-				'condition' => [
-					'show_images' => 'yes',
-				],
-				'selectors' => [
-					$root_selector => '--vred-linked-swatches-list-swatch-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
