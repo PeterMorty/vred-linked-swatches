@@ -39,6 +39,7 @@ if ($header_version !== $constant_version) {
 
 $output_path = getenv('VRED_LINKED_SWATCHES_MANIFEST_OUTPUT');
 $base_url = rtrim((string) getenv('VRED_LINKED_SWATCHES_UPDATES_BASE_URL'), '/');
+$icons_base_url = rtrim((string) getenv('VRED_LINKED_SWATCHES_ICONS_BASE_URL'), '/');
 $homepage = (string) getenv('VRED_LINKED_SWATCHES_PLUGIN_HOMEPAGE');
 $requires = (string) getenv('VRED_LINKED_SWATCHES_REQUIRES_WP');
 $tested = (string) getenv('VRED_LINKED_SWATCHES_TESTED_WP');
@@ -53,6 +54,10 @@ if ($output_path === '') {
 if ($base_url === '') {
 	fwrite(STDERR, "VRED_LINKED_SWATCHES_UPDATES_BASE_URL is required.\n");
 	exit(1);
+}
+
+if ($icons_base_url === '') {
+	$icons_base_url = 'https://dev.viviendoenred.com/wordpress/plugins/updates/icons';
 }
 
 if ($homepage === '') {
@@ -81,8 +86,8 @@ $manifest = [
 	'requires_php' => $requires_php,
 	'last_updated' => gmdate('Y-m-d H:i:s'),
 	'icons' => [
-		'1x' => $base_url . '/icon-128x128.png',
-		'2x' => $base_url . '/icon-256x256.png',
+		'1x' => $icons_base_url . '/icon-128x128.png',
+		'2x' => $icons_base_url . '/icon-256x256.png',
 	],
 	'sections' => [
 		'description' => 'Connect independent WooCommerce products as visual linked swatches for Elementor product templates.',

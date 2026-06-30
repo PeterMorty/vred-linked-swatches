@@ -268,17 +268,7 @@ final class Updater {
 	}
 
 	private static function get_plugin_icons(array $plugin_info = []) : array {
-		$icons = ! empty($plugin_info['icons']) && is_array($plugin_info['icons']) ? $plugin_info['icons'] : [];
-
-		if (empty($icons['1x'])) {
-			$icons['1x'] = 'https://dev.viviendoenred.com/wordpress/plugins/vred-linked-swatches/updates/icon-128x128.png';
-		}
-
-		if (empty($icons['2x'])) {
-			$icons['2x'] = 'https://dev.viviendoenred.com/wordpress/plugins/vred-linked-swatches/updates/icon-256x256.png';
-		}
-
-		return $icons;
+		return ! empty($plugin_info['icons']) && is_array($plugin_info['icons']) ? $plugin_info['icons'] : [];
 	}
 
 	private static function validate_remote_url(string $url) : string {
