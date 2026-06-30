@@ -254,20 +254,10 @@ final class Linked_Swatch_Trigger_Widget extends Widget_Base {
 			'swatch_border_radius',
 			[
 				'label' => __('Border radius', 'vred-linked-swatches'),
-				'type' => Controls_Manager::SLIDER,
+				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 999,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 50,
-					],
-				],
 				'selectors' => [
-					'{{WRAPPER}} .vred-linked-swatches' => '--vred-linked-swatches-swatch-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .vred-linked-swatches' => '--vred-linked-swatches-swatch-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);

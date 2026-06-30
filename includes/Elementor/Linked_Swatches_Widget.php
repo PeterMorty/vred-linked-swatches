@@ -250,20 +250,10 @@ final class Linked_Swatches_Widget extends Widget_Base {
 			'item_border_radius',
 			[
 				'label' => __('Border radius', 'vred-linked-swatches'),
-				'type' => Controls_Manager::SLIDER,
+				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 80,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 50,
-					],
-				],
 				'selectors' => [
-					$root_selector => '--vred-linked-swatches-items-radius: {{SIZE}}{{UNIT}};',
+					$root_selector => '--vred-linked-swatches-items-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -397,20 +387,10 @@ final class Linked_Swatches_Widget extends Widget_Base {
 			'visual_border_radius',
 			[
 				'label' => __('Border radius', 'vred-linked-swatches'),
-				'type' => Controls_Manager::SLIDER,
+				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 999,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 50,
-					],
-				],
 				'selectors' => [
-					$root_selector => '--vred-linked-swatches-swatch-radius: {{SIZE}}{{UNIT}};',
+					$root_selector => '--vred-linked-swatches-swatch-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
