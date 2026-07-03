@@ -55,6 +55,26 @@ final class Renderer {
 		return trim((string) ob_get_clean());
 	}
 
+	public static function render_loop_swatches(\WC_Product $product, array $args = []) : string {
+		$args = self::normalize_loop_args($args);
+		$items = self::get_loop_items($product, $args);
+
+		if (empty($items)) {
+			return '';
+		}
+
+		ob_start();
+		?>
+		<div class="vred-linked-swatches-loop" data-vred-linked-swatches-loop>
+			<?php foreach ($items as $item) : ?>
+				<?php echo self::render_loop_item($item, $args); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php endforeach; ?>
+		</div>
+		<?php
+
+		return trim((string) ob_get_clean());
+	}
+
 	public static function render_products(\WC_Product $product, array $args = []) : string {
 		$args = self::normalize_items_args($args);
 		$items = self::get_items($product, $args);
@@ -111,6 +131,69 @@ final class Renderer {
 		}
 
 		return $items;
+	}
+
+	private static function get_loop_items(\WC_Product $product, array $args) : array {
+		$items = self::get_items($product, [
+			'include_current' => true,
+			'show_images' => false,
+			'trim_text' => true,
+		]);
+		$items = array_values(array_filter($items, static function (array $item) use ($args) : bool {
+			$option_data = (array) ($item['option_data'] ?? []);
+
+			return self::has_swatch_visual($option_data) || (! empty($args['use_product_thumbnail']) && ! empty($option_data['product_image_url']));
+		}));
+
+		if (! empty($args['hide_when_single']) && count($items) <= 1) {
+			return [];
+		}
+
+		if ($args['max_items'] > 0) {
+			$items = array_slice($items, 0, $args['max_items']);
+		}
+
+		return $items;
+	}
+
+	private static function render_loop_item(array $item, array $args) : string {
+		$product = $item['product'] ?? null;
+
+		if (! $product instanceof \WC_Product) {
+			return '';
+		}
+
+		$is_current = ! empty($item['is_current']);
+		$link_current = ! empty($args['link_current']);
+		$item_classes = ['vred-linked-swatches-loop__item'];
+
+		if ($is_current) {
+			$item_classes[] = 'is-active';
+		}
+
+		$tag = $is_current && ! $link_current ? 'span' : 'a';
+		$attributes = [
+			'class' => implode(' ', $item_classes),
+			'aria-label' => (string) ($item['name'] ?? $product->get_name()),
+			'title' => (string) ($item['name'] ?? $product->get_name()),
+		];
+
+		if ($is_current) {
+			$attributes['aria-current'] = 'page';
+		}
+
+		if ($tag === 'a') {
+			$attributes['href'] = ! empty($item['permalink']) ? (string) $item['permalink'] : get_permalink($product->get_id());
+		}
+
+		ob_start();
+		?>
+		<<?php echo tag_escape($tag); ?> <?php echo self::get_attributes_markup($attributes); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+			<?php echo self::render_swatch((array) ($item['option_data'] ?? []), 'vred-linked-swatches-loop__swatch', ! empty($args['use_product_thumbnail'])); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		</<?php echo tag_escape($tag); ?>>
+		<?php
+
+		return trim((string) ob_get_clean());
 	}
 
 	private static function render_item(array $item, array $args) : string {
@@ -226,6 +309,22 @@ final class Renderer {
 		$image_url = ! empty($data['image_url']) ? esc_url_raw((string) $data['image_url']) : '';
 
 		return $image_url !== '' || $color !== '' || $secondary_color !== '';
+	}
+
+	private static function normalize_loop_args(array $args = []) : array {
+		$args = wp_parse_args($args, [
+			'max_items' => 0,
+			'hide_when_single' => true,
+			'link_current' => false,
+			'use_product_thumbnail' => false,
+		]);
+
+		$args['max_items'] = absint($args['max_items']);
+		$args['hide_when_single'] = ! empty($args['hide_when_single']);
+		$args['link_current'] = ! empty($args['link_current']);
+		$args['use_product_thumbnail'] = ! empty($args['use_product_thumbnail']);
+
+		return $args;
 	}
 
 	private static function normalize_items_args(array $args = []) : array {

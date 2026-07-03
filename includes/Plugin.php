@@ -49,10 +49,15 @@ final class Plugin {
 		require_once VRED_LINKED_SWATCHES_PATH . 'includes/Assets.php';
 		require_once VRED_LINKED_SWATCHES_PATH . 'includes/Swatch_Data.php';
 		require_once VRED_LINKED_SWATCHES_PATH . 'includes/Renderer.php';
+		require_once VRED_LINKED_SWATCHES_PATH . 'includes/Loop_Swatches.php';
 		require_once VRED_LINKED_SWATCHES_PATH . 'includes/Admin/Swatch_Panel.php';
 
 		Assets::boot();
 		Admin\Swatch_Panel::boot();
+
+		if (self::has_woocommerce()) {
+			Loop_Swatches::boot();
+		}
 
 		if (defined('VRED_LINKED_SWATCHES_PRIVATE_UPDATER') && VRED_LINKED_SWATCHES_PRIVATE_UPDATER) {
 			require_once VRED_LINKED_SWATCHES_PATH . 'includes/Updater/Updater.php';

@@ -6,7 +6,7 @@ Tested up to: 7.0
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 10.8
-Stable tag: 2.0.0
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,7 @@ Current features:
 * Trigger widget with custom link support by default.
 * Optional VRED Elements panel integration when VRED Elements is active.
 * Local frontend assets and private updater support.
+* Optional compact swatches in WooCommerce product loops through a filter.
 
 == Installation ==
 
@@ -56,11 +57,32 @@ No.
 
 No. VRED Elements is optional. When it is active, the trigger widget can open a VRED Elements panel.
 
+= How do I show swatches in WooCommerce product loops? =
+
+Loop swatches are disabled by default. Enable them from your child theme, Code Snippets, or a small custom plugin:
+
+    add_filter('vred_linked_swatches_show_loop_swatches', '__return_true');
+
+To limit them to product archive contexts:
+
+    add_filter('vred_linked_swatches_show_loop_swatches', function ($show, $product) {
+    	unset($show, $product);
+    
+    	return is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy();
+    }, 10, 2);
+
+By default, the plugin renders compact swatches after the loop price using the `woocommerce_after_shop_loop_item_title` hook.
+
 = Does it use remote assets or tracking? =
 
 No. Frontend assets are local. The only remote request is the private updater while the plugin is distributed privately.
 
 == Changelog ==
+
+= 2.1.0 =
+
+* Added optional compact swatches in WooCommerce product loops.
+* Added filter-based activation for loop swatches.
 
 = 2.0.0 =
 

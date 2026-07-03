@@ -237,6 +237,58 @@
 .vred-linked-swatches-list--visual-swatch .vred-linked-swatches-list__meta {
 	display: block
 }
+.vred-linked-swatches-loop {
+	--vred-linked-swatches-loop-swatch-size: 14px;
+	--vred-linked-swatches-loop-gap: 6px;
+	--vred-linked-swatches-loop-active-color: currentColor;
+	--vred-linked-swatches-swatch-size: var(--vred-linked-swatches-loop-swatch-size);
+	--vred-linked-swatches-swatch-border-style: solid;
+	--vred-linked-swatches-swatch-border-width: 0;
+	--vred-linked-swatches-swatch-border-color: transparent;
+	--vred-linked-swatches-swatch-radius: 0;
+	--vred-linked-swatches-border-color: rgba(0, 0, 0, 0.16);
+	display: flex;
+	align-items: center;
+	gap: var(--vred-linked-swatches-loop-gap);
+	margin-top: 10px;
+	line-height: 1
+}
+.vred-linked-swatches-loop__item,
+.vred-linked-swatches-loop__item:hover,
+.vred-linked-swatches-loop__item:focus {
+	color: inherit;
+	text-decoration: none
+}
+.vred-linked-swatches-loop__item {
+	position: relative;
+	display: inline-flex;
+	flex: 0 0 auto;
+	padding: 0;
+	width: var(--vred-linked-swatches-loop-swatch-size);
+	height: var(--vred-linked-swatches-loop-swatch-size);
+	border: 0;
+	background: transparent
+}
+.vred-linked-swatches-loop__item.is-active {
+	cursor: default
+}
+.vred-linked-swatches-loop__item.is-active::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -5px;
+	height: 1px;
+	background: var(--vred-linked-swatches-loop-active-color)
+}
+.vred-linked-swatches-loop__swatch {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: var(--vred-linked-swatches-swatch-radius);
+	overflow: hidden;
+	clip-path: inset(0 round var(--vred-linked-swatches-swatch-radius))
+}
 @media (max-width: 767px) {
 	.vred-linked-swatches-trigger {
 		gap: 14px;
