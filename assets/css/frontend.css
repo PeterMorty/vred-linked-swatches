@@ -239,7 +239,7 @@
 }
 .vred-linked-swatches-loop {
 	--vred-linked-swatches-loop-swatch-size: 14px;
-	--vred-linked-swatches-loop-gap: 6px;
+	--vred-linked-swatches-loop-gap: 8px;
 	--vred-linked-swatches-loop-active-color: currentColor;
 	--vred-linked-swatches-swatch-size: var(--vred-linked-swatches-loop-swatch-size);
 	--vred-linked-swatches-swatch-border-style: solid;
