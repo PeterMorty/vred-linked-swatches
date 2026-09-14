@@ -51,9 +51,12 @@ final class Plugin {
 		require_once VRED_LINKED_SWATCHES_PATH . 'includes/Renderer.php';
 		require_once VRED_LINKED_SWATCHES_PATH . 'includes/Loop_Swatches.php';
 		require_once VRED_LINKED_SWATCHES_PATH . 'includes/Admin/Swatch_Panel.php';
+		require_once VRED_LINKED_SWATCHES_PATH . 'includes/Integrations/WP_All_Import.php';
 
+		Swatch_Data::boot();
 		Assets::boot();
 		Admin\Swatch_Panel::boot();
+		Integrations\WP_All_Import::boot();
 
 		if (self::has_woocommerce()) {
 			Loop_Swatches::boot();

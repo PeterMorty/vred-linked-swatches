@@ -13,6 +13,16 @@ final class Swatch_Data {
 	public const META_SECONDARY_COLOR = '_vred_linked_swatches_secondary_color';
 	public const META_IMAGE_ID = '_vred_linked_swatches_image_id';
 	public const META_IDS = '_vred_linked_swatches_ids';
+	public const META_GROUP = '_vred_linked_swatches_group';
+
+	public static function boot() : void {
+		// Also sanitize custom fields written directly through the WordPress metadata API.
+		add_filter('sanitize_post_meta_' . self::META_GROUP . '_for_product', [self::class, 'sanitize_group']);
+	}
+
+	public static function sanitize_group($group) : string {
+		return is_scalar($group) ? trim(sanitize_text_field((string) $group)) : '';
+	}
 
 	public static function get_current_product($product_id = 0) {
 		$product_id = absint($product_id);

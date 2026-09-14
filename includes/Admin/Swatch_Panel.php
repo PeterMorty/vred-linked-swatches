@@ -74,6 +74,14 @@ final class Swatch_Panel {
 
 				<?php
 				woocommerce_wp_text_input([
+					'id' => Swatch_Data::META_GROUP,
+					'label' => __('Linked group', 'vred-linked-swatches'),
+					'value' => Swatch_Data::sanitize_group($product->get_meta(Swatch_Data::META_GROUP, true)),
+					'desc_tip' => true,
+					'description' => __('Products with the same group can be linked automatically after a WP All Import import.', 'vred-linked-swatches'),
+				]);
+
+				woocommerce_wp_text_input([
 					'id' => Swatch_Data::META_NAME,
 					'label' => __('Option name', 'vred-linked-swatches'),
 					'placeholder' => '',
@@ -112,6 +120,10 @@ final class Swatch_Panel {
 	public static function save_product(\WC_Product $product) : void {
 		if (! current_user_can('edit_product', $product->get_id())) {
 			return;
+		}
+
+		if (isset($_POST[Swatch_Data::META_GROUP])) {
+			$product->update_meta_data(Swatch_Data::META_GROUP, Swatch_Data::sanitize_group(wp_unslash($_POST[Swatch_Data::META_GROUP])));
 		}
 
 		$product->update_meta_data(Swatch_Data::META_NAME, self::sanitize_text_field_from_request(Swatch_Data::META_NAME));

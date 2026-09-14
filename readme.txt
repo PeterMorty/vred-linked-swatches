@@ -29,6 +29,7 @@ Current features:
 * Optional VRED Elements panel integration when VRED Elements is active.
 * Local frontend assets and private updater support.
 * Optional compact swatches in WooCommerce product loops through a filter.
+* Optional product groups synchronized automatically after WP All Import imports.
 
 == Installation ==
 
@@ -77,7 +78,30 @@ By default, the plugin renders compact swatches after the loop price using the `
 
 No. Frontend assets are local. The only remote request is the private updater while the plugin is distributed privately.
 
+= Can I import Linked Swatches with WP All Import? =
+
+Yes. Map these product custom fields in WP All Import:
+
+* `_vred_linked_swatches_group`: common group identifier, for example `100-5004-10`.
+* `_vred_linked_swatches_name`: swatch name, for example `Negro-Blanco`.
+* `_vred_linked_swatches_color`: primary HEX color, for example `#111111`.
+* `_vred_linked_swatches_secondary_color`: secondary HEX color, for example `#F2F0E8`.
+* `_vred_linked_swatches_image_id`: optional existing WordPress attachment ID.
+
+Do not import `_vred_linked_swatches_ids`. At the end of each import (`pmxi_after_xml_import`), the plugin regenerates this array for every non-empty group, including products outside the import. Each product links to all other products with the same group, never itself. Previous links are replaced, and a group with one product gets an empty array. Trashed products, auto-drafts, and variations are excluded; draft and private products participate, while existing frontend visibility rules still apply.
+
+Group identifiers are sanitized as plain text and trimmed; matching is case-sensitive. Products with an empty or missing group keep their existing manual links, even when their group has just been cleared.
+
+The optional Linked group field in the product's Linked Swatches tab lets you view or edit the identifier. Saving this field alone does not synchronize links; synchronization runs after an import finishes. Automatically generated links appear in the existing Linked products selector.
+
+WP All Import is optional. Without it, manual Linked Swatches configuration works as before.
+
 == Changelog ==
+
+= Unreleased =
+
+* Added `_vred_linked_swatches_group` and the optional Linked group product field.
+* Added regenerative group linking after WP All Import completes, preserving manual links on products without a group.
 
 = 2.1.0 =
 
