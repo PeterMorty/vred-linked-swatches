@@ -3,7 +3,7 @@
  * Plugin Name: VRED Linked Swatches
  * Plugin URI: https://viviendoenred.com
  * Description: Connects independent WooCommerce products as visual linked swatches.
- * Version: 2.1.0
+ * Version: 2.2.0
  * Author: VRED
  * Author URI: https://viviendoenred.com
  * Text Domain: vred-linked-swatches
@@ -22,7 +22,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('VRED_LINKED_SWATCHES_VERSION', '2.1.0');
+define('VRED_LINKED_SWATCHES_VERSION', '2.2.0');
 define('VRED_LINKED_SWATCHES_FILE', __FILE__);
 define('VRED_LINKED_SWATCHES_BASENAME', plugin_basename(__FILE__));
 define('VRED_LINKED_SWATCHES_PATH', plugin_dir_path(__FILE__));

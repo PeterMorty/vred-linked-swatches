@@ -6,7 +6,7 @@ Tested up to: 7.0
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 10.8
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,7 +98,7 @@ WP All Import is optional. Without it, manual Linked Swatches configuration work
 
 == Changelog ==
 
-= Unreleased =
+= 2.2.0 =
 
 * Added `_vred_linked_swatches_group` and the optional Linked group product field.
 * Added regenerative group linking after WP All Import completes, preserving manual links on products without a group.
