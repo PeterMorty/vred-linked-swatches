@@ -220,16 +220,16 @@ foreach ($catalog as $id => $product) {
 
 $_POST = [Swatch_Data::META_GROUP => "  <b>ADMIN-GROUP</b>\n"];
 Swatch_Panel::save_product($catalog[1]);
-check($catalog[1]->meta[Swatch_Data::META_GROUP] === 'ADMIN-GROUP', 'The existing panel must save sanitized groups.');
+check($catalog[1]->meta[Swatch_Data::META_GROUP] === 'LARGE', 'The panel must ignore submitted group metadata.');
 $_POST = [];
 Swatch_Panel::save_product($catalog[1]);
-check($catalog[1]->meta[Swatch_Data::META_GROUP] === 'ADMIN-GROUP', 'An absent field must not clear the group.');
+check($catalog[1]->meta[Swatch_Data::META_GROUP] === 'LARGE', 'An absent field must not clear the group.');
 $_POST = [Swatch_Data::META_GROUP => ''];
 Swatch_Panel::save_product($catalog[1]);
-check($catalog[1]->meta[Swatch_Data::META_GROUP] === '', 'The administrator must be able to clear a group.');
+check($catalog[1]->meta[Swatch_Data::META_GROUP] === 'LARGE', 'The panel must not clear internal group metadata.');
 $can_edit = false;
 $_POST = [Swatch_Data::META_GROUP => 'DENIED'];
 Swatch_Panel::save_product($catalog[1]);
-check($catalog[1]->meta[Swatch_Data::META_GROUP] === '', 'Saving groups must respect product edit permissions.');
+check($catalog[1]->meta[Swatch_Data::META_GROUP] === 'LARGE', 'Denied product edits must preserve internal group metadata.');
 
 echo "WP All Import regression checks passed.\n";

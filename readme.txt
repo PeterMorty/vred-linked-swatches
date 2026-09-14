@@ -6,7 +6,7 @@ Tested up to: 7.0
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 10.8
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,11 +92,17 @@ Do not import `_vred_linked_swatches_ids`. At the end of each import (`pmxi_afte
 
 Group identifiers are sanitized as plain text and trimmed; matching is case-sensitive. Products with an empty or missing group keep their existing manual links, even when their group has just been cleared.
 
-The optional Linked group field in the product's Linked Swatches tab lets you view or edit the identifier. Saving this field alone does not synchronize links; synchronization runs after an import finishes. Automatically generated links appear in the existing Linked products selector.
+`_vred_linked_swatches_group` is internal metadata imported directly as a custom field by WP All Import. It is not displayed or edited in the Linked Swatches product tab. Synchronization runs after an import finishes, and automatically generated links appear in the existing Linked products selector.
 
 WP All Import is optional. Without it, manual Linked Swatches configuration works as before.
 
 == Changelog ==
+
+= 2.2.1 =
+
+* Removed the internal Linked group field from the WooCommerce product UI.
+* Linked group metadata remains available internally for WP All Import synchronization.
+* Updated tests to reflect the hidden group metadata behavior.
 
 = 2.2.0 =
 
