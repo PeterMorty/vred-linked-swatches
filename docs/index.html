@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VRED Linked Swatches Docs</title>
+	<link rel="stylesheet" href="assets/main.css">
+	<script src="assets/main.js" defer></script>
+</head>
+<body>
+	<header class="site-header">
+		<div class="container header-bar">
+			<div>
+				<p class="eyebrow">Documentación pública</p>
+				<h1>VRED Linked Swatches</h1>
+			</div>
+			<form class="search" role="search">
+				<label class="sr-only" for="docs-search">Buscar en la documentación</label>
+				<input id="docs-search" type="search" placeholder="Buscar funciones, campos, integraciones...">
+			</form>
+		</div>
+	</header>
+
+	<div class="container app-shell">
+		<aside class="sidebar" aria-label="Secciones de documentación">
+			<nav>
+				<h2>Navegación</h2>
+				<ul id="section-nav" class="nav-list"></ul>
+			</nav>
+		</aside>
+
+		<main id="main-content" class="content" tabindex="-1">
+			<section class="intro" aria-labelledby="docs-title">
+				<p class="eyebrow">Guía local</p>
+				<h2 id="docs-title">Documentación de uso de VRED Linked Swatches</h2>
+				<p id="docs-description">Cargando contenido...</p>
+				<div id="docs-summary" class="summary" aria-live="polite"></div>
+			</section>
+
+			<section id="docs-status" class="status" aria-live="polite"></section>
+			<section id="docs-sections" class="section-stack"></section>
+		</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,561 @@
+{
+  "meta": {
+    "name": "VRED Linked Swatches",
+    "version": "2.2.1",
+    "docsVersion": "2.2.1",
+    "language": "es",
+    "updated": "2026-09-15",
+    "status": "stable",
+    "description": "Documentación pública de uso para VRED Linked Swatches: relaciona productos WooCommerce independientes mediante swatches de color, bicolor o textura y permite navegar entre sus fichas. Incluye configuración manual, widgets de Elementor e integración opcional con WP All Import.",
+    "sourceOfTruth": "El código del plugin sigue siendo la fuente técnica final. Este JSON es la fuente pública mantenible para la web de documentación.",
+    "runtimePackage": false,
+    "publicSafe": true
+  },
+  "requirements": [
+    {
+      "id": "wordpress",
+      "title": "WordPress",
+      "description": "Requiere WordPress 6.5 o posterior. Compatibilidad declarada hasta WordPress 7.0 en readme.txt.",
+      "optional": false
+    },
+    {
+      "id": "php",
+      "title": "PHP",
+      "description": "Requiere PHP 7.4 o posterior.",
+      "optional": false
+    },
+    {
+      "id": "woocommerce",
+      "title": "WooCommerce",
+      "description": "Requiere WooCommerce activo, versión 8.0 o posterior. Compatibilidad declarada hasta WooCommerce 10.8. Los swatches relacionan productos independientes; no crean variaciones.",
+      "optional": false
+    },
+    {
+      "id": "elementor",
+      "title": "Elementor",
+      "description": "Necesario para utilizar los widgets incluidos Linked Swatch Trigger y Linked Swatches. Sin Elementor siguen disponibles la configuración del producto, la sincronización de grupos y los swatches opcionales del loop de WooCommerce. Elementor Pro no es un requisito.",
+      "optional": true
+    }
+  ],
+  "settings": {
+    "title": "Configuración de VRED Linked Swatches",
+    "description": "Los datos se configuran por producto en la pestaña Linked Swatches de WooCommerce y la presentación se ajusta en los widgets de Elementor. No existe una página propia de ajustes globales.",
+    "tabs": [
+      {
+        "id": "linked-swatches",
+        "title": "Linked Swatches",
+        "description": "Define los productos relacionados y la apariencia del swatch del producto que estás editando. Guarda el producto para aplicar los cambios.",
+        "whereToConfigure": [
+          "Productos > Editar producto > Datos del producto > Linked Swatches"
+        ],
+        "options": [
+          "Linked products",
+          "Option name",
+          "Primary color",
+          "Secondary color",
+          "Texture image"
+        ],
+        "tips": [
+          "Configura el nombre, los colores y la textura en cada producto: los demás productos utilizan esos datos al mostrarlo como opción.",
+          "Las relaciones manuales se guardan por producto. Para navegación recíproca debes configurar también los otros productos."
+        ],
+        "limitations": [
+          "El grupo de importación es un metadato interno: no se muestra ni se edita en esta pestaña."
+        ]
+      },
+      {
+        "id": "elementor-widgets",
+        "title": "Widgets de Elementor",
+        "description": "Añade Linked Swatches para listar las opciones y Linked Swatch Trigger para mostrar el valor actual con un enlace o acceso a un panel.",
+        "whereToConfigure": [
+          "Editor de Elementor > Categoría VRED Linked Swatches > Linked Swatches",
+          "Editor de Elementor > Categoría VRED Linked Swatches > Linked Swatch Trigger"
+        ],
+        "options": [
+          "Contenido",
+          "Diseño",
+          "Estilo"
+        ],
+        "requirements": [
+          "WooCommerce",
+          "Elementor"
+        ],
+        "limitations": [
+          "Los widgets necesitan un producto disponible en el contexto de renderizado. El plugin no crea automáticamente una plantilla de producto."
+        ]
+      }
+    ]
+  },
+  "features": [
+    {
+      "id": "independent-products",
+      "title": "Productos independientes relacionados",
+      "type": "feature",
+      "group": "Productos",
+      "description": "Conecta productos WooCommerce independientes que representan colores, acabados, materiales u otras opciones de una misma familia. Cada producto conserva su ficha, URL, imágenes, precio y stock.",
+      "whereToConfigure": [
+        "Productos > Editar producto > Datos del producto > Linked Swatches > Linked products"
+      ],
+      "useCases": [
+        "Un producto por color",
+        "Acabados o materiales con su propia ficha"
+      ],
+      "limitations": [
+        "No sustituye las variaciones de WooCommerce ni sincroniza precio, inventario o imágenes entre productos."
+      ],
+      "technical": {
+        "file": "includes/Swatch_Data.php",
+        "metaKey": "_vred_linked_swatches_ids"
+      },
+      "status": "stable"
+    },
+    {
+      "id": "manual-links",
+      "title": "Selección manual de productos",
+      "type": "feature",
+      "group": "Productos",
+      "description": "Busca y selecciona varios productos en Linked products. Al guardar, los IDs se normalizan, se eliminan duplicados y se excluye el propio producto.",
+      "whereToConfigure": [
+        "Productos > Editar producto > Datos del producto > Linked Swatches > Linked products"
+      ],
+      "tips": [
+        "Para que A enlace a B y B enlace a A, guarda ambas selecciones manuales.",
+        "Los productos sin grupo conservan sus relaciones manuales tras las importaciones."
+      ],
+      "limitations": [
+        "La selección manual no crea enlaces recíprocos automáticamente.",
+        "Si el producto tiene un grupo no vacío, la siguiente sincronización de WP All Import sustituye su selección por los miembros de ese grupo."
+      ],
+      "technical": {
+        "file": "includes/Admin/Swatch_Panel.php",
+        "metaKey": "_vred_linked_swatches_ids"
+      },
+      "status": "stable"
+    },
+    {
+      "id": "swatch-name",
+      "title": "Nombre del swatch",
+      "type": "feature",
+      "group": "Apariencia",
+      "description": "Option name contiene el nombre mostrado para esta opción, por ejemplo Negro-Blanco, Roble o Mate. Si está vacío, se utiliza el nombre del producto.",
+      "whereToConfigure": [
+        "Productos > Editar producto > Datos del producto > Linked Swatches > Option name"
+      ],
+      "limitations": [
+        "No cambia el título ni la URL del producto."
+      ],
+      "technical": {
+        "metaKey": "_vred_linked_swatches_name",
+        "file": "includes/Swatch_Data.php"
+      },
+      "status": "stable"
+    },
+    {
+      "id": "primary-color",
+      "title": "Color primario",
+      "type": "feature",
+      "group": "Apariencia",
+      "description": "Primary color define el color principal del swatch mediante un valor HEX, por ejemplo #111111. Puede seleccionarse con el selector de color.",
+      "whereToConfigure": [
+        "Productos > Editar producto > Datos del producto > Linked Swatches > Primary color"
+      ],
+      "tips": [
+        "Usa #RGB o #RRGGBB, por ejemplo #fff o #111111."
+      ],
+      "limitations": [
+        "Los valores que no son colores HEX válidos se descartan al guardar desde el panel y al leerlos para mostrar el swatch.",
+        "Una textura válida tiene prioridad visual sobre los colores."
+      ],
+      "technical": {
+        "metaKey": "_vred_linked_swatches_color",
+        "file": "includes/Swatch_Data.php"
+      },
+      "status": "stable"
+    },
+    {
+      "id": "bicolor",
+      "title": "Color secundario y swatches bicolor",
+      "type": "feature",
+      "group": "Apariencia",
+      "description": "Secondary color es opcional. Cuando ambos colores son válidos, el swatch muestra dos mitades de color separadas en diagonal a 135 grados.",
+      "whereToConfigure": [
+        "Productos > Editar producto > Datos del producto > Linked Swatches > Primary color",
+        "Productos > Editar producto > Datos del producto > Linked Swatches > Secondary color"
+      ],
+      "tips": [
+        "Ejemplo bicolor: #111111 como primario y #F2F0E8 como secundario.",
+        "Deja el secundario vacío para un swatch de un solo color."
+      ],
+      "limitations": [
+        "Si solo existe un secundario válido, se muestra como color único.",
+        "La imagen/textura tiene prioridad sobre el swatch bicolor."
+      ],
+      "technical": {
+        "metaKey": "_vred_linked_swatches_secondary_color",
+        "file": "includes/Renderer.php",
+        "assets": [
+          "assets/css/frontend.css"
+        ]
+      },
+      "status": "stable"
+    },
+    {
+      "id": "texture-image",
+      "title": "Imagen o textura opcional",
+      "type": "feature",
+      "group": "Apariencia",
+      "description": "Texture image permite elegir una imagen de la biblioteca de medios para representar tejidos, materiales o acabados. Select image selecciona la textura y Remove image la retira.",
+      "whereToConfigure": [
+        "Productos > Editar producto > Datos del producto > Linked Swatches > Texture image"
+      ],
+      "limitations": [
+        "Se guarda el ID de un adjunto de WordPress, no una URL externa.",
+        "La textura válida se muestra antes que los colores y no reemplaza la imagen principal del producto.",
+        "Sin textura ni colores, el trigger utiliza la miniatura del producto o el placeholder de WooCommerce. La lista y el loop tienen sus propias opciones de imagen."
+      ],
+      "technical": {
+        "metaKey": "_vred_linked_swatches_image_id",
+        "imageSize": "thumbnail",
+        "file": "includes/Renderer.php"
+      },
+      "status": "stable"
+    },
+    {
+      "id": "product-navigation",
+      "title": "Navegación entre productos",
+      "type": "widget",
+      "group": "Elementor",
+      "description": "El widget Linked Swatches muestra las opciones relacionadas con enlaces a sus fichas. El producto actual puede incluirse como opción activa, sin enlace a sí mismo.",
+      "whereToConfigure": [
+        "Editor de Elementor > VRED Linked Swatches > Linked Swatches"
+      ],
+      "features": [
+        {
+          "title": "Contenido",
+          "description": "Permite incluir el producto actual y alternar entre imágenes de producto o swatches.",
+          "options": [
+            "Include current product",
+            "Show product image",
+            "Tamaño de imagen"
+          ]
+        },
+        {
+          "title": "Diseño y estilo",
+          "description": "Ajusta la distribución y la apariencia de los elementos.",
+          "options": [
+            "Columnas responsive",
+            "Separación",
+            "Alineación",
+            "Borde activo",
+            "Tipografía",
+            "Trim text",
+            "Tamaño y borde del swatch"
+          ]
+        }
+      ],
+      "requirements": [
+        "WooCommerce",
+        "Elementor"
+      ],
+      "limitations": [
+        "Navegar a otro swatch abre la ficha del otro producto; no cambia una variación dentro de la ficha actual.",
+        "Los productos relacionados que no estén publicados no se muestran. Los IDs que no resuelvan a un producto se omiten."
+      ],
+      "technical": {
+        "file": "includes/Elementor/Linked_Swatches_Widget.php",
+        "runtime": "includes/Renderer.php"
+      },
+      "status": "stable"
+    },
+    {
+      "id": "swatch-trigger",
+      "title": "Linked Swatch Trigger",
+      "type": "widget",
+      "group": "Elementor",
+      "description": "Muestra el swatch y nombre de la opción actual junto con una etiqueta e icono. Por defecto utiliza un enlace personalizado. Con VRED Elements activo puede abrir o alternar un panel existente.",
+      "whereToConfigure": [
+        "Editor de Elementor > VRED Linked Swatches > Linked Swatch Trigger > Content"
+      ],
+      "options": [
+        "Label",
+        "Link",
+        "Extra CSS classes",
+        "Action, Panel ID y Panel action cuando VRED Elements está activo"
+      ],
+      "requirements": [
+        "WooCommerce",
+        "Elementor"
+      ],
+      "limitations": [
+        "Para el enlace personalizado hay que configurar un destino; el valor vacío apunta a #.",
+        "El trigger no crea el panel ni la lista de productos: configura el panel en VRED Elements y añade el contenido necesario."
+      ],
+      "technical": {
+        "file": "includes/Elementor/Linked_Swatch_Trigger_Widget.php"
+      },
+      "status": "stable"
+    },
+    {
+      "id": "loop-swatches",
+      "title": "Swatches compactos en listados",
+      "type": "feature",
+      "group": "WooCommerce",
+      "description": "Muestra swatches compactos después del precio en el loop clásico de WooCommerce. Están desactivados por defecto y se activan mediante un filtro.",
+      "whereToConfigure": [
+        "Tema hijo, Code Snippets o plugin propio > filtro vred_linked_swatches_show_loop_swatches"
+      ],
+      "tips": [
+        "Activación: add_filter('vred_linked_swatches_show_loop_swatches', '__return_true');"
+      ],
+      "limitations": [
+        "La plantilla debe ejecutar woocommerce_after_shop_loop_item_title; no se garantiza su aparición en bloques o loops personalizados que omitan ese hook.",
+        "Por defecto no utiliza miniaturas de producto como alternativa y se oculta cuando queda una sola opción visual.",
+        "No requiere Elementor."
+      ],
+      "technical": {
+        "file": "includes/Loop_Swatches.php",
+        "hook": "woocommerce_after_shop_loop_item_title",
+        "priority": 12,
+        "filters": [
+          "vred_linked_swatches_show_loop_swatches",
+          "vred_linked_swatches_loop_swatches_args"
+        ],
+        "defaults": {
+          "max_items": 0,
+          "hide_when_single": true,
+          "link_current": false,
+          "use_product_thumbnail": false
+        }
+      },
+      "status": "stable"
+    }
+  ],
+  "integrations": [
+    {
+      "id": "wp-all-import",
+      "title": "WP All Import",
+      "optional": true,
+      "type": "integration",
+      "description": "WP All Import NO es una dependencia del plugin. Si no está instalado, VRED Linked Swatches funciona normalmente con su configuración manual. Esta integración opcional enlaza automáticamente los productos independientes que comparten un grupo al completarse una importación.",
+      "whereToConfigure": [
+        "WP All Import > Configuración de la importación de productos > Custom Fields (campos personalizados)"
+      ],
+      "requirements": [
+        "WooCommerce",
+        "WP All Import solo para ejecutar esta integración"
+      ],
+      "features": [
+        {
+          "title": "Campos personalizados",
+          "description": "Mapea los datos de cada producto a los siguientes metadatos.",
+          "notes": [
+            "_vred_linked_swatches_group: identifica productos independientes pertenecientes al mismo grupo. Los productos con el mismo group se enlazan automáticamente entre sí; un producto nunca se enlaza consigo mismo.",
+            "_vred_linked_swatches_name: nombre mostrado para la opción. Si está vacío, se utiliza el nombre del producto.",
+            "_vred_linked_swatches_color: color primario HEX, por ejemplo #111111.",
+            "_vred_linked_swatches_secondary_color: segundo color HEX opcional, por ejemplo #F2F0E8."
+          ]
+        },
+        {
+          "title": "Ejemplo de mapeo en WP All Import",
+          "description": "En Custom Fields, introduce cada nombre de campo y su expresión en la casilla de valor correspondiente.",
+          "notes": [
+            "_vred_linked_swatches_group → {swatch_group[1]}",
+            "_vred_linked_swatches_name → {swatch_name[1]}",
+            "_vred_linked_swatches_color → {swatch_color[1]}",
+            "_vred_linked_swatches_secondary_color → {swatch_secondary_color[1]}"
+          ]
+        },
+        {
+          "title": "IDs generados automáticamente",
+          "description": "NO debe importarse manualmente _vred_linked_swatches_ids. VRED Linked Swatches genera automáticamente ese campo después de completar la importación.",
+          "notes": [
+            "El campo contiene un array de IDs relacionados, sin duplicados y excluyendo el propio producto.",
+            "Las relaciones generadas aparecen en el selector Linked products existente. No hay un campo de grupo en el admin de WooCommerce."
+          ]
+        },
+        {
+          "title": "Momento y alcance de la sincronización",
+          "description": "La sincronización se ejecuta mediante pmxi_after_xml_import y solo realiza el procesamiento cuando WP All Import completa una importación.",
+          "notes": [
+            "Registrar el hook no inicia ningún procesamiento si WP All Import no está instalado.",
+            "No se sincroniza por cada fila importada, al visitar una ficha ni al guardar manualmente un producto.",
+            "Al finalizar la importación se revisan todos los grupos no vacíos del catálogo, incluidos productos ajenos a esa importación."
+          ]
+        },
+        {
+          "title": "Reimportaciones",
+          "description": "Cada ejecución reconstruye las relaciones de los productos con grupo a partir de la composición actual del grupo.",
+          "notes": [
+            "Sustituye las relaciones anteriores; elimina enlaces obsoletos de los productos que se sincronizan.",
+            "No duplica IDs y excluye siempre el propio producto.",
+            "Si un producto cambia de grupo, se reconstruyen tanto el grupo anterior como el nuevo.",
+            "Un grupo con un solo producto recibe un array vacío de relaciones.",
+            "Si las relaciones ya coinciden, no vuelve a guardar ese producto."
+          ]
+        },
+        {
+          "title": "Productos sin grupo",
+          "description": "Los productos sin _vred_linked_swatches_group, con un valor vacío o con solo espacios mantienen el comportamiento normal y sus relaciones manuales.",
+          "notes": [
+            "Si se borra el grupo de un producto, sus relaciones existentes se conservan, incluso si procedían de una importación anterior; puedes revisarlas en Linked products.",
+            "Los demás productos que siguen en el grupo se reconstruyen sin incluir al producto que salió."
+          ]
+        }
+      ],
+      "limitations": [
+        "El identificador del grupo se sanea como texto plano y se recortan los espacios de los extremos. La comparación distingue mayúsculas y minúsculas.",
+        "Solo participan entradas de tipo product. Se excluyen variaciones y estados trash, auto-draft e inherit.",
+        "Los borradores y productos privados pueden participar en la sincronización, pero los relacionados no publicados no se muestran en el frontend.",
+        "Los cambios manuales en un producto con grupo no vacío se reemplazan al finalizar la siguiente importación.",
+        "Esta integración no importa imágenes desde URLs. Opcionalmente se puede mapear _vred_linked_swatches_image_id a un ID de adjunto existente de WordPress."
+      ],
+      "technical": {
+        "file": "includes/Integrations/WP_All_Import.php",
+        "hook": "pmxi_after_xml_import",
+        "callback": "VRED_Linked_Swatches\\Integrations\\WP_All_Import::sync_groups",
+        "priority": 10,
+        "acceptedArgs": 0,
+        "groupMetaKey": "_vred_linked_swatches_group",
+        "generatedMetaKey": "_vred_linked_swatches_ids",
+        "batchSize": 200,
+        "example": {
+          "_vred_linked_swatches_group": "{swatch_group[1]}",
+          "_vred_linked_swatches_name": "{swatch_name[1]}",
+          "_vred_linked_swatches_color": "{swatch_color[1]}",
+          "_vred_linked_swatches_secondary_color": "{swatch_secondary_color[1]}"
+        }
+      },
+      "status": "stable"
+    },
+    {
+      "id": "elementor",
+      "title": "Elementor",
+      "optional": true,
+      "type": "integration",
+      "description": "Registra los widgets Linked Swatch Trigger y Linked Swatches en la categoría VRED Linked Swatches cuando Elementor y WooCommerce están disponibles. Elementor Pro no es necesario.",
+      "whereToConfigure": [
+        "Editor de Elementor > Categoría VRED Linked Swatches"
+      ],
+      "limitations": [
+        "Sin Elementor no se registran estos widgets; el panel de datos del producto y las demás funciones siguen disponibles."
+      ],
+      "technical": {
+        "file": "includes/Elementor/Elementor.php",
+        "hooks": [
+          "elementor/loaded",
+          "elementor/widgets/register"
+        ]
+      },
+      "status": "stable"
+    },
+    {
+      "id": "vred-elements",
+      "title": "VRED Elements",
+      "optional": true,
+      "type": "integration",
+      "description": "Añade al trigger la opción de abrir o alternar un panel de VRED Elements. Sin VRED Elements, el trigger utiliza su enlace personalizado.",
+      "whereToConfigure": [
+        "VRED Elements > Configuración del widget Panel",
+        "Linked Swatch Trigger > Content > Action > VRED Panel",
+        "Linked Swatch Trigger > Content > Panel ID y Panel action"
+      ],
+      "limitations": [
+        "El ID debe coincidir con el de un panel existente en la página.",
+        "VRED Elements no es necesario para relacionar productos ni mostrar el widget Linked Swatches."
+      ],
+      "technical": {
+        "file": "includes/Elementor/Linked_Swatch_Trigger_Widget.php",
+        "runtime": "includes/Renderer.php",
+        "attributes": [
+          "data-vred-panel-open",
+          "data-vred-panel-toggle"
+        ]
+      },
+      "status": "stable"
+    }
+  ],
+  "technical": [
+    {
+      "id": "metadata",
+      "title": "Modelo de datos",
+      "description": "Los datos pertenecen a cada producto WooCommerce y se guardan como metadatos. No hay una tabla propia de grupos.",
+      "features": [
+        {
+          "title": "Metadatos del producto",
+          "notes": [
+            "_vred_linked_swatches_name: texto mostrado.",
+            "_vred_linked_swatches_color: color primario HEX.",
+            "_vred_linked_swatches_secondary_color: color secundario HEX opcional.",
+            "_vred_linked_swatches_image_id: ID de adjunto de WordPress.",
+            "_vred_linked_swatches_ids: array de IDs de productos relacionados, gestionado por el selector manual o por la sincronización; no importar manualmente.",
+            "_vred_linked_swatches_group: identificador interno de grupo utilizado por WP All Import."
+          ]
+        }
+      ],
+      "technical": {
+        "file": "includes/Swatch_Data.php",
+        "postType": "product"
+      },
+      "status": "stable"
+    },
+    {
+      "id": "runtime",
+      "title": "Arquitectura del plugin",
+      "description": "El arranque carga los datos de swatches, el panel de producto, el renderizador, los assets y la integración opcional de importación. Los widgets se registran cuando Elementor y WooCommerce están disponibles.",
+      "technical": {
+        "file": "vred-linked-swatches.php",
+        "bootstrap": "includes/Plugin.php",
+        "data": "includes/Swatch_Data.php",
+        "admin": "includes/Admin/Swatch_Panel.php",
+        "renderer": "includes/Renderer.php",
+        "loop": "includes/Loop_Swatches.php",
+        "integrations": [
+          "includes/Integrations/WP_All_Import.php",
+          "includes/Elementor/Elementor.php"
+        ],
+        "assets": "includes/Assets.php"
+      },
+      "status": "stable"
+    },
+    {
+      "id": "documentation",
+      "title": "Documentación y paquete de release",
+      "description": "docs/ es documentación del repositorio y está separada del runtime. index.html carga data/vred-linked-swatches.json mediante fetch y utiliza únicamente CSS y JavaScript locales, sin compilación.",
+      "whereToConfigure": [
+        "Editar docs/data/vred-linked-swatches.json para mantener el contenido.",
+        "Servir docs/ por HTTP en local o publicar la carpeta /docs de la rama elegida en GitHub Pages."
+      ],
+      "tips": [
+        "El código del plugin es la fuente técnica final; el JSON es la fuente pública de la web.",
+        "La convención parte de PeterMorty/vred-elements: meta, requirements, settings.tabs y fichas con id, title, description, whereToConfigure, features, requirements, limitations, tips, technical y status.",
+        "features, integrations y technical amplían las secciones para este plugin conservando el formato de fichas de VRED Elements."
+      ],
+      "limitations": [
+        "La apertura directa mediante file:// puede impedir la carga del JSON; utiliza un servidor HTTP.",
+        "docs/ no se incluye en el ZIP de release. El workflow copia únicamente assets/, includes/, languages/, uninstall.php, readme.txt, vred-linked-swatches.php y LICENSE si existe."
+      ],
+      "technical": {
+        "runtimePackage": false,
+        "publicSafe": true,
+        "dataFile": "docs/data/vred-linked-swatches.json",
+        "referenceRepository": "PeterMorty/vred-elements",
+        "referenceDataFile": "docs/data/vred-elements.json",
+        "referenceFiles": [
+          "docs/index.html",
+          "docs/assets/main.css",
+          "docs/assets/main.js"
+        ],
+        "sourceFiles": [
+          "vred-linked-swatches.php",
+          "readme.txt",
+          "includes/Swatch_Data.php",
+          "includes/Admin/Swatch_Panel.php",
+          "includes/Integrations/WP_All_Import.php",
+          "includes/Renderer.php",
+          "includes/Loop_Swatches.php"
+        ]
+      },
+      "status": "stable"
+    }
+  ]
+}
