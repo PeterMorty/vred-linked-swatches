@@ -1,10 +1,10 @@
 {
   "meta": {
     "name": "VRED Linked Swatches",
-    "version": "2.2.1",
-    "docsVersion": "2.2.1",
+    "version": "2.3.0",
+    "docsVersion": "2.3.0",
     "language": "es",
-    "updated": "2026-09-15",
+    "updated": "2026-09-16",
     "status": "stable",
     "description": "Documentación pública de uso para VRED Linked Swatches: relaciona productos WooCommerce independientes mediante swatches de color, bicolor o textura y permite navegar entre sus fichas. Incluye configuración manual, widgets de Elementor e integración opcional con WP All Import.",
     "sourceOfTruth": "El código del plugin sigue siendo la fuente técnica final. Este JSON es la fuente pública mantenible para la web de documentación.",
@@ -232,16 +232,17 @@
       "features": [
         {
           "title": "Contenido",
-          "description": "Permite incluir el producto actual y alternar entre imágenes de producto o swatches.",
+          "description": "Permite incluir el producto actual, alternar entre imágenes de producto o swatches y ocultar los nombres. Show name (Mostrar nombre) está activado por defecto, también en widgets existentes. Sin imágenes de producto solo se muestran opciones con color principal, secundario o textura configurados.",
           "options": [
             "Include current product",
             "Show product image",
+            "Show name",
             "Tamaño de imagen"
           ]
         },
         {
           "title": "Diseño y estilo",
-          "description": "Ajusta la distribución y la apariencia de los elementos.",
+          "description": "Ajusta la distribución y la apariencia de los elementos. Los controles de texto solo aparecen cuando Show name está activado.",
           "options": [
             "Columnas responsive",
             "Separación",
@@ -252,6 +253,11 @@
             "Tamaño y borde del swatch"
           ]
         }
+      ],
+      "tips": [
+        "Con Show product image desactivado y Show name desactivado se muestra únicamente la muestra visual.",
+        "Con Show product image activado y Show name desactivado se conserva la imagen de producto y la muestra pequeña, si existe, sin bloques de metadatos vacíos.",
+        "Ocultar el texto mantiene el nombre accesible de la muestra. Si no has configurado un nombre de opción, se sigue utilizando el nombre del producto."
       ],
       "requirements": [
         "WooCommerce",

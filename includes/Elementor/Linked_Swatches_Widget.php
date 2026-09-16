@@ -78,6 +78,18 @@ final class Linked_Swatches_Widget extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'show_name',
+			[
+				'label' => __('Show name', 'vred-linked-swatches'),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __('Yes', 'vred-linked-swatches'),
+				'label_off' => __('No', 'vred-linked-swatches'),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
@@ -264,6 +276,9 @@ final class Linked_Swatches_Widget extends Widget_Base {
 				'label' => __('Text', 'vred-linked-swatches'),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
+				'condition' => [
+					'show_name' => 'yes',
+				],
 			]
 		);
 
@@ -274,6 +289,9 @@ final class Linked_Swatches_Widget extends Widget_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
+				'condition' => [
+					'show_name' => 'yes',
+				],
 			]
 		);
 
@@ -282,6 +300,9 @@ final class Linked_Swatches_Widget extends Widget_Base {
 			[
 				'label' => __('Alignment', 'vred-linked-swatches'),
 				'type' => Controls_Manager::CHOOSE,
+				'condition' => [
+					'show_name' => 'yes',
+				],
 				'options' => [
 					'left' => [
 						'title' => __('Left', 'vred-linked-swatches'),
@@ -313,6 +334,9 @@ final class Linked_Swatches_Widget extends Widget_Base {
 				'name' => 'name_typography',
 				'label' => __('Typography', 'vred-linked-swatches'),
 				'selector' => $name_selector,
+				'condition' => [
+					'show_name' => 'yes',
+				],
 			]
 		);
 
@@ -321,6 +345,9 @@ final class Linked_Swatches_Widget extends Widget_Base {
 			[
 				'label' => __('Text color', 'vred-linked-swatches'),
 				'type' => Controls_Manager::COLOR,
+				'condition' => [
+					'show_name' => 'yes',
+				],
 				'selectors' => [
 					$root_selector => '--vred-linked-swatches-items-text-color: {{VALUE}};',
 				],
@@ -432,6 +459,7 @@ final class Linked_Swatches_Widget extends Widget_Base {
 		echo Renderer::render_products($product, [
 			'include_current' => ! empty($settings['include_current']),
 			'show_images' => ! empty($settings['show_images']),
+			'show_name' => ! empty($settings['show_name']),
 			'image_size' => ! empty($settings['image_size']) ? (string) $settings['image_size'] : 'woocommerce_thumbnail',
 			'image_custom_dimension' => ! empty($settings['image_custom_dimension']) && is_array($settings['image_custom_dimension']) ? $settings['image_custom_dimension'] : [],
 			'trim_text' => ! empty($settings['trim_text']),

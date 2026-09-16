@@ -79,6 +79,12 @@ final class Renderer {
 		$args = self::normalize_items_args($args);
 		$items = self::get_items($product, $args);
 
+		if (! $args['show_images']) {
+			$items = array_values(array_filter($items, static function (array $item) : bool {
+				return self::has_swatch_visual((array) ($item['option_data'] ?? []));
+			}));
+		}
+
 		if (empty($items)) {
 			return '';
 		}
@@ -222,20 +228,22 @@ final class Renderer {
 		}
 
 		$option_data = (array) ($item['option_data'] ?? []);
-		$swatch_markup = self::has_swatch_visual($option_data) ? self::render_swatch($option_data, 'vred-linked-swatches-list__swatch') : '';
+		$swatch_markup = $args['show_images'] && self::has_swatch_visual($option_data) ? self::render_swatch($option_data, 'vred-linked-swatches-list__swatch') : '';
+		$name = (string) ($item['name'] ?? '');
+		$show_name = $args['show_name'] && $name !== '';
 
 		ob_start();
 		?>
 		<<?php echo tag_escape($tag); ?> <?php echo self::get_attributes_markup($attributes); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<?php echo self::render_item_visual($item, $args); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			<span class="vred-linked-swatches-list__meta">
-				<?php if (! $args['show_images']) : ?>
-					<span class="vred-linked-swatches-list__name"><?php echo esc_html((string) ($item['name'] ?? '')); ?></span>
-				<?php else : ?>
+			<?php if ($show_name || $swatch_markup !== '') : ?>
+				<span class="vred-linked-swatches-list__meta">
 					<?php echo $swatch_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					<span class="vred-linked-swatches-list__name"><?php echo esc_html((string) ($item['name'] ?? '')); ?></span>
-				<?php endif; ?>
-			</span>
+					<?php if ($show_name) : ?>
+						<span class="vred-linked-swatches-list__name"><?php echo esc_html($name); ?></span>
+					<?php endif; ?>
+				</span>
+			<?php endif; ?>
 		</<?php echo tag_escape($tag); ?>>
 		<?php
 
@@ -331,12 +339,14 @@ final class Renderer {
 		$args = wp_parse_args($args, [
 			'include_current' => true,
 			'show_images' => true,
+			'show_name' => true,
 			'image_size' => 'woocommerce_thumbnail',
 			'image_custom_dimension' => [],
 			'trim_text' => true,
 		]);
 
 		$args['show_images'] = ! empty($args['show_images']);
+		$args['show_name'] = ! empty($args['show_name']);
 		$args['include_current'] = ! empty($args['include_current']);
 		$args['trim_text'] = ! empty($args['trim_text']);
 		$args['image_size'] = self::normalize_image_size((string) $args['image_size'], is_array($args['image_custom_dimension']) ? $args['image_custom_dimension'] : []);

@@ -6,7 +6,7 @@ Tested up to: 7.0
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 10.8
-Stable tag: 2.2.1
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ Current features:
 * Split swatches with primary and secondary colors.
 * Texture/image swatches for fabrics, materials, and finishes.
 * Trigger fallback to the product thumbnail when no texture or color is configured.
-* Elementor widgets for product templates.
+* Elementor widgets for product templates, with optional names in Linked Swatches.
 * Trigger widget with custom link support by default.
 * Optional VRED Elements panel integration when VRED Elements is active.
 * Local frontend assets and private updater support.
@@ -87,6 +87,13 @@ Do not import `_vred_linked_swatches_ids`. Only when an import completes (`pmxi_
 See `docs/data/vred-linked-swatches.json` and `docs/index.html` in the repository for mapping examples, reimport behavior and limitations. The documentation is not included in the plugin ZIP.
 
 == Changelog ==
+
+= 2.3.0 =
+
+* Added a Show name control to hide option names in the Linked Swatches widget.
+* Swatch mode without product images now skips linked products without a configured color or texture.
+* Avoided empty items and metadata blocks when names or product images are hidden.
+* Added a documentation site with widget guides and WP All Import mapping examples.
 
 = 2.2.1 =
 
