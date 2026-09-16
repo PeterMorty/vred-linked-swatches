@@ -10,7 +10,7 @@ on:
       tested_wp:
         description: WordPress tested up to
         required: true
-        default: '7.2'
+        default: '7.1'
       requires_php:
         description: Minimum PHP version
         required: true
